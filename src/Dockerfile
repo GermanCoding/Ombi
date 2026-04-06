@@ -47,9 +47,13 @@ ENV COMPlus_EnableDiagnostics=0 \
 
 WORKDIR /app
 
+# UID/GID for the non-root ombi user (override at build time if needed)
+ARG OMBI_UID=1000
+ARG OMBI_GID=1000
+
 # Create a non-root user for the application
-RUN addgroup --system --gid 1000 ombi \
-    && adduser --system --uid 1000 --ingroup ombi --no-create-home ombi \
+RUN addgroup --system --gid ${OMBI_GID} ombi \
+    && adduser --system --uid ${OMBI_UID} --ingroup ombi --no-create-home ombi \
     && mkdir -p /config \
     && chown ombi:ombi /config
 
