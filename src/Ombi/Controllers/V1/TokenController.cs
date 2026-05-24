@@ -283,6 +283,7 @@ namespace Ombi.Controllers.V1
                 if (Request.HttpContext?.Request?.Headers != null && Request.HttpContext.Request.Headers.ContainsKey(authSettings.HeaderAuthVariable))
                 {
                     var username = Request.HttpContext.Request.Headers[authSettings.HeaderAuthVariable].ToString();
+                    var email = Request.HttpContext.Request.Headers[authSettings.HeaderAuthEmail].ToString();
 
                     // Check if user exists
                     var user = await _userManager.FindByNameAsync(username);
@@ -310,6 +311,12 @@ namespace Ombi.Controllers.V1
                         {
                             return new UnauthorizedResult();
                         }
+                    }
+
+                    if (email.HasValue() && user.Email != email)
+                    {
+                        user.Email = email;
+                        await _userManager.UpdateAsync(user);
                     }
 
                     return await CreateToken(true, user);
