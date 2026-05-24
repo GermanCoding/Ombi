@@ -251,6 +251,7 @@ export interface IAuthenticationSettings extends ISettings {
   enableHeaderAuth: boolean;
   headerAuthVariable: string;
   headerAuthCreateUser: boolean;
+  headerAuthEmail: string;
 }
 
 export interface ICustomPage extends ISettings {
