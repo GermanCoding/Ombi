@@ -1,0 +1,15 @@
+.git/
+.github/
+**/bin/
+**/obj/
+**/node_modules/
+**/.angular/
+**/dist/
+.vs/
+.vscode/
+.idea/
+tests/
+assets/
+*.md
+Dockerfile
+.dockerignore
